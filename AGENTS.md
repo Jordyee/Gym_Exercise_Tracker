@@ -108,6 +108,18 @@ Pull Request sudah dibuat ke `development`:
 https://github.com/Jordyee/Gym_Exercise_Tracker/pull/9
 ```
 
+Status PR #9:
+
+- Sudah merged ke `development` pada 2026-06-11.
+- Merge commit: `acc61fca4ad5eaebf35bc1ce4b7b68ff9136b18e`.
+- Local feature branch terakhir: `feature/mvp-remaining-issues` dengan commit dokumentasi TDD `c5d49c0`.
+- Setelah sesi baru dimulai, pindah ke `development` dan pull remote terbaru sebelum lanjut:
+
+```powershell
+git switch development
+git pull --ff-only origin development
+```
+
 PR #9 menautkan minimal satu issue dan mencantumkan:
 
 ```text
@@ -119,7 +131,12 @@ Closes #6
 Closes #7
 ```
 
-Jika nomor GitHub Issue manual berbeda dari dokumen lokal, sesuaikan referensi `Closes #...` di PR sebelum merge.
+Catatan GitHub Issues:
+
+- Issues #2 sampai #7 belum otomatis tertutup setelah PR #9 merge karena default branch repo adalah `master`, sedangkan PR #9 merge ke `development`.
+- Jangan menganggap ini error.
+- Saat final delivery dari `development` ke `master`, cantumkan lagi `Closes #2` sampai `Closes #7` di PR final agar GitHub menutup issue otomatis.
+- Jika workflow dosen menganggap merge ke `development` sudah selesai, issue dapat ditutup manual dengan komentar bahwa scope selesai melalui PR #9.
 
 Scope yang sudah selesai:
 
