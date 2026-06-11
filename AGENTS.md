@@ -88,6 +88,80 @@ http://127.0.0.1:5173
 
 Catatan: pastikan PR Issue 1 target ke `development`, bukan `master`.
 
+## Status Terbaru Setelah Sesi Sub-Agent
+
+Pada sesi 2026-06-11 sampai 2026-06-12, sisa MVP vertical slices sudah diselesaikan pada branch:
+
+```text
+feature/mvp-remaining-issues
+```
+
+Branch tersebut sudah dipush ke remote:
+
+```text
+origin/feature/mvp-remaining-issues
+```
+
+Pull Request sudah dibuat ke `development`:
+
+```text
+https://github.com/Jordyee/Gym_Exercise_Tracker/pull/9
+```
+
+PR #9 menautkan minimal satu issue dan mencantumkan:
+
+```text
+Closes #2
+Closes #3
+Closes #4
+Closes #5
+Closes #6
+Closes #7
+```
+
+Jika nomor GitHub Issue manual berbeda dari dokumen lokal, sesuaikan referensi `Closes #...` di PR sebelum merge.
+
+Scope yang sudah selesai:
+
+- Issue 2: Search dan filter exercise.
+- Issue 3: Tambah exercise custom.
+- Issue 4: Catat set dan lihat 3 catatan terakhir.
+- Issue 5: Riwayat per exercise dengan filter 7 hari, 30 hari, dan semua.
+- Issue 6: Edit dan hapus catatan set dengan konfirmasi.
+- Issue 7: Persistensi localStorage, preferensi kg/lbs, dan bahasa English/Indonesia.
+
+Dokumentasi tambahan yang dibuat:
+
+- `README.md`: instruksi instalasi, penggunaan, test/build, dan catatan PR.
+- `subAgentsTask.md`: log pembagian kerja sub-agent, review tiap issue, dan final verification.
+
+Verifikasi final yang sudah dijalankan:
+
+```powershell
+npm test
+npm run build
+```
+
+Hasil verifikasi:
+
+- `npm test` passed: 4 test files, 29 tests.
+- `npm run build` passed.
+- Browser verification di `http://127.0.0.1:5173` passed untuk:
+  - tambah exercise custom,
+  - simpan set,
+  - ubah tampilan ke lbs,
+  - ubah bahasa ke Indonesia,
+  - refresh browser dan memastikan data/preferensi tetap ada,
+  - tampilan mobile tanpa horizontal overflow,
+  - tanpa console error.
+
+Catatan untuk chat/sesi berikutnya:
+
+- Jangan mulai ulang implementasi Issue 2-7 kecuali ada review feedback dari PR #9.
+- Lanjutkan dari branch `feature/mvp-remaining-issues` jika perlu memperbaiki PR #9.
+- Jika PR #9 sudah di-merge, pindah ke `development` dan pull terbaru sebelum lanjut.
+- Step berikutnya yang disebut user adalah fase Test-Driven Development/documentation evidence; gunakan `docs/05-tdd-and-testing.md` untuk mencatat bukti TDD dan verifikasi jika diminta.
+
 ## Vertical Slice Order
 
 Ikuti urutan dari `docs/03-vertical-slice-issues.md`:
