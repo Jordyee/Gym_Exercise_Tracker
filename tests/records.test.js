@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import {
   createSetRecord,
+  deleteSetRecord,
+  updateSetRecord,
   filterRecordsByPeriod,
   getHistoryRecords,
   getHistorySummary,
@@ -72,6 +74,116 @@ describe("set record creation", () => {
       },
       errors: {},
     });
+  });
+});
+
+describe("set record updates", () => {
+  it("updates editable fields while preserving the record identity and creation timestamp", () => {
+    const records = [
+      createRecord(
+        "set-1",
+        "bench-press",
+        "2026-06-10",
+        "2026-06-10T08:00:00.000Z",
+        20,
+      ),
+      createRecord(
+        "set-2",
+        "squat",
+        "2026-06-11",
+        "2026-06-11T08:00:00.000Z",
+        40,
+      ),
+    ];
+
+    const result = updateSetRecord(
+      records,
+      "set-1",
+      {
+        exerciseId: "lat-pulldown",
+        weightKg: "35",
+        reps: "12",
+        setNumber: "3",
+        date: "2026-06-12",
+      },
+      "2026-06-12T09:30:00.000Z",
+    );
+
+    expect(result).toEqual({
+      records: [
+        {
+          id: "set-1",
+          exerciseId: "lat-pulldown",
+          weightKg: 35,
+          reps: 12,
+          setNumber: 3,
+          date: "2026-06-12",
+          createdAt: "2026-06-10T08:00:00.000Z",
+          updatedAt: "2026-06-12T09:30:00.000Z",
+        },
+        records[1],
+      ],
+      record: {
+        id: "set-1",
+        exerciseId: "lat-pulldown",
+        weightKg: 35,
+        reps: 12,
+        setNumber: 3,
+        date: "2026-06-12",
+        createdAt: "2026-06-10T08:00:00.000Z",
+        updatedAt: "2026-06-12T09:30:00.000Z",
+      },
+      errors: {},
+    });
+  });
+
+  it("returns validation errors and leaves records unchanged when edit input is invalid", () => {
+    const records = [
+      createRecord(
+        "set-1",
+        "bench-press",
+        "2026-06-10",
+        "2026-06-10T08:00:00.000Z",
+        20,
+      ),
+    ];
+
+    const result = updateSetRecord(records, "set-1", {
+      exerciseId: "",
+      weightKg: "20.5",
+      reps: "0",
+      setNumber: "-1",
+      date: "",
+    });
+
+    expect(result).toEqual({
+      records,
+      record: null,
+      errors: {
+        exerciseId: "Choose an exercise before saving a set.",
+        weightKg: "Weight must be a whole number in kg.",
+        reps: "Reps must be a positive whole number.",
+        setNumber: "Set number must be a positive whole number.",
+        date: "Date is required.",
+      },
+    });
+  });
+});
+
+describe("set record deletion", () => {
+  it("removes the requested record and leaves other records in place", () => {
+    const records = [
+      createRecord("set-1", "bench-press", "2026-06-10", "2026-06-10T08:00:00.000Z"),
+      createRecord("set-2", "bench-press", "2026-06-11", "2026-06-11T08:00:00.000Z"),
+      createRecord("set-3", "squat", "2026-06-11", "2026-06-11T09:00:00.000Z"),
+    ];
+
+    const updatedRecords = deleteSetRecord(records, "set-2");
+
+    expect(updatedRecords.map((record) => record.id)).toEqual([
+      "set-1",
+      "set-3",
+    ]);
   });
 });
 

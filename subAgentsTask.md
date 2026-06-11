@@ -22,7 +22,7 @@ Working branch: `feature/mvp-remaining-issues`
 | 3 | Add custom exercise | Issue 2 | Delegated after Issue 2 |
 | 4 | Log set and see last 3 records | Issue 1 | Delegated after Issue 3 |
 | 5 | View history per exercise | Issue 4 | Delegated after Issue 4 |
-| 6 | Edit and delete set records | Issue 4, Issue 5 | Pending Issue 5 review |
+| 6 | Edit and delete set records | Issue 4, Issue 5 | Delegated after Issue 5 |
 | 7 | Browser storage and preferences | Issue 3, Issue 4 | Pending Issue 3 and Issue 4 review |
 
 ## Agent Assignments
@@ -162,3 +162,40 @@ Working branch: `feature/mvp-remaining-issues`
   - Total sets are computed from the filtered records.
 - Remaining risk:
   - Browser date-input variation across dates was mostly covered by unit tests; final browser verification will cover the integrated workflow.
+
+### Issue 6 - Edit and Delete Set Records
+
+- Agent: Franklin
+- Status: Completed and reviewed by main agent
+- Scope:
+  - `src/App.jsx`
+  - `src/components/HistoryView.jsx`
+  - `src/components/EditSetModal.jsx`
+  - `src/components/ConfirmDialog.jsx`
+  - `src/lib/records.js`
+  - `tests/records.test.js`
+  - `src/styles/index.css`
+- Blocking status: Issue 4 and Issue 5 satisfied.
+- Review status: Passed.
+- Files changed:
+  - `src/App.jsx`
+  - `src/components/HistoryView.jsx`
+  - `src/components/EditSetModal.jsx`
+  - `src/components/ConfirmDialog.jsx`
+  - `src/lib/records.js`
+  - `tests/records.test.js`
+  - `src/styles/index.css`
+- Verification:
+  - Sub-agent reported TDD red/green for update and delete helpers.
+  - `npm test` passed with 24 tests.
+  - `npm run build` passed.
+- Acceptance review:
+  - Edit mode opens from history records.
+  - Exercise, weight, reps, set number, and date can be edited.
+  - Edit uses the same set validation as creation.
+  - Edited records update shared state used by recent records and history.
+  - Delete uses a confirmation dialog.
+  - Confirmed delete removes the record from state and UI.
+  - Cancelled delete leaves the record unchanged.
+- Remaining risk:
+  - Modal/dialog flows are manually verified by sub-agent and helper-tested; final integrated browser verification will cover a representative edit/delete flow.

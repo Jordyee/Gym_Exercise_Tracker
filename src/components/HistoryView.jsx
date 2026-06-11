@@ -7,7 +7,12 @@ const PERIOD_OPTIONS = [
   { value: "all", label: "All" },
 ];
 
-export function HistoryView({ records, selectedExercise }) {
+export function HistoryView({
+  records,
+  selectedExercise,
+  onEditRecord,
+  onRequestDelete,
+}) {
   const [activePeriod, setActivePeriod] = useState("7-days");
   const historyRecords = useMemo(
     () =>
@@ -75,6 +80,7 @@ export function HistoryView({ records, selectedExercise }) {
                 <th scope="col">Weight</th>
                 <th scope="col">Reps</th>
                 <th scope="col">Set</th>
+                <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -84,6 +90,24 @@ export function HistoryView({ records, selectedExercise }) {
                   <td>{record.weightKg} kg</td>
                   <td>{record.reps}</td>
                   <td>{record.setNumber}</td>
+                  <td>
+                    <div className="record-actions">
+                      <button
+                        className="compact-action"
+                        type="button"
+                        onClick={() => onEditRecord(record)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="compact-danger-action"
+                        type="button"
+                        onClick={() => onRequestDelete(record)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
                 </tr>
               ))}
             </tbody>

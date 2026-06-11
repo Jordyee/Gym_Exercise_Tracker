@@ -173,7 +173,8 @@ select {
 
 .primary-action,
 .secondary-action,
-.ghost-action {
+.ghost-action,
+.danger-action {
   min-height: 44px;
   border-radius: 8px;
   cursor: pointer;
@@ -195,12 +196,25 @@ select {
   padding: 10px 14px;
 }
 
+.danger-action {
+  border: 1px solid #9f1d14;
+  background: #b42318;
+  color: #ffffff;
+  padding: 10px 14px;
+}
+
 .primary-action:hover,
 .primary-action:focus-visible,
 .secondary-action:hover,
 .secondary-action:focus-visible,
 .ghost-action:hover,
-.ghost-action:focus-visible {
+.ghost-action:focus-visible,
+.danger-action:hover,
+.danger-action:focus-visible,
+.compact-action:hover,
+.compact-action:focus-visible,
+.compact-danger-action:hover,
+.compact-danger-action:focus-visible {
   outline: none;
   box-shadow: 0 0 0 3px rgba(47, 119, 88, 0.18);
 }
@@ -354,7 +368,7 @@ select {
 
 .history-table {
   width: 100%;
-  min-width: 480px;
+  min-width: 620px;
   border-collapse: collapse;
   color: #2f4639;
 }
@@ -374,6 +388,88 @@ select {
 
 .history-table tbody tr:last-child td {
   border-bottom: 0;
+}
+
+.record-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.compact-action,
+.compact-danger-action {
+  min-height: 38px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 800;
+  padding: 8px 10px;
+}
+
+.compact-action {
+  border: 1px solid #b9c9bf;
+  background: #ffffff;
+  color: #2f4639;
+}
+
+.compact-danger-action {
+  border: 1px solid #e0a19b;
+  background: #fff4f2;
+  color: #9f1d14;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(23, 32, 27, 0.58);
+}
+
+.modal-panel,
+.dialog-panel {
+  width: min(100%, 620px);
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+  border: 1px solid #c6d2ca;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 18px 48px rgba(23, 32, 27, 0.28);
+}
+
+.modal-panel {
+  padding: 18px;
+}
+
+.dialog-panel {
+  padding: 20px;
+}
+
+.dialog-panel h2 {
+  margin: 0;
+  color: #17201b;
+  font-size: 22px;
+  letter-spacing: 0;
+}
+
+.dialog-panel p {
+  margin: 10px 0 0;
+  color: #2f4639;
+  line-height: 1.5;
+}
+
+.edit-set-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
 }
 
 .recent-empty,
@@ -485,7 +581,8 @@ select {
 
   .add-exercise-fields,
   .set-log-fields,
-  .exercise-filters {
+  .exercise-filters,
+  .edit-set-fields {
     grid-template-columns: 1fr;
   }
 

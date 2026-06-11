@@ -52,6 +52,62 @@ export function createSetRecord(input = {}, now = new Date().toISOString()) {
   };
 }
 
+export function updateSetRecord(
+  records = [],
+  recordId,
+  input = {},
+  now = new Date().toISOString(),
+) {
+  const validation = validateSetInput(input);
+
+  if (!validation.isValid) {
+    return {
+      records: [...records],
+      record: null,
+      errors: validation.errors,
+    };
+  }
+
+  let updatedRecord = null;
+  const updatedRecords = records.map((record) => {
+    if (record.id !== recordId) {
+      return record;
+    }
+
+    updatedRecord = {
+      ...record,
+      exerciseId: input.exerciseId,
+      weightKg: Number(input.weightKg),
+      reps: Number(input.reps),
+      setNumber: Number(input.setNumber),
+      date: input.date,
+      updatedAt: now,
+    };
+
+    return updatedRecord;
+  });
+
+  if (!updatedRecord) {
+    return {
+      records: [...records],
+      record: null,
+      errors: {
+        record: "Set record was not found.",
+      },
+    };
+  }
+
+  return {
+    records: updatedRecords,
+    record: updatedRecord,
+    errors: {},
+  };
+}
+
+export function deleteSetRecord(records = [], recordId) {
+  return records.filter((record) => record.id !== recordId);
+}
+
 export function getRecentRecords(records = [], exerciseId, limit = 3) {
   if (!exerciseId) {
     return [];
