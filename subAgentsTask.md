@@ -21,7 +21,7 @@ Working branch: `feature/mvp-remaining-issues`
 | 2 | Search and filter exercise | Issue 1 | Delegated after Issue 1 |
 | 3 | Add custom exercise | Issue 2 | Delegated after Issue 2 |
 | 4 | Log set and see last 3 records | Issue 1 | Delegated after Issue 3 |
-| 5 | View history per exercise | Issue 4 | Pending Issue 4 review |
+| 5 | View history per exercise | Issue 4 | Delegated after Issue 4 |
 | 6 | Edit and delete set records | Issue 4, Issue 5 | Pending Issue 5 review |
 | 7 | Browser storage and preferences | Issue 3, Issue 4 | Pending Issue 3 and Issue 4 review |
 
@@ -130,3 +130,35 @@ Working branch: `feature/mvp-remaining-issues`
   - Last 3 records update after saving.
 - Remaining risk:
   - Records are held in React state only until Issue 7 adds browser persistence.
+
+### Issue 5 - View History Per Exercise
+
+- Agent: Einstein
+- Status: Completed and reviewed by main agent
+- Scope:
+  - `src/App.jsx`
+  - `src/components/HistoryView.jsx`
+  - `src/lib/records.js`
+  - `tests/records.test.js`
+  - `src/styles/index.css`
+- Blocking status: Issue 4 satisfied.
+- Review status: Passed.
+- Files changed:
+  - `src/App.jsx`
+  - `src/components/HistoryView.jsx`
+  - `src/lib/records.js`
+  - `tests/records.test.js`
+  - `src/styles/index.css`
+- Verification:
+  - Sub-agent reported TDD coverage for period filters, per-exercise history, and summary.
+  - `npm test` passed with 21 tests.
+  - `npm run build` passed.
+- Acceptance review:
+  - User can open history through the History tab.
+  - History is scoped to the selected exercise.
+  - Period filters support 7 days, 30 days, and all.
+  - History list changes with active period.
+  - Highest weight is computed from the filtered records.
+  - Total sets are computed from the filtered records.
+- Remaining risk:
+  - Browser date-input variation across dates was mostly covered by unit tests; final browser verification will cover the integrated workflow.

@@ -78,6 +78,7 @@ select {
 .add-exercise-panel,
 .set-log-panel,
 .recent-records-panel,
+.history-panel,
 .catalog-section {
   border: 1px solid #c6d2ca;
   border-radius: 8px;
@@ -87,9 +88,49 @@ select {
 
 .selected-panel,
 .set-log-panel,
-.recent-records-panel {
+.recent-records-panel,
+.history-panel {
   margin-bottom: 18px;
   padding: 18px;
+}
+
+.view-tabs,
+.period-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.view-tabs {
+  margin-bottom: 18px;
+}
+
+.tab-button,
+.period-button {
+  min-height: 44px;
+  border: 1px solid #b9c9bf;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #2f4639;
+  cursor: pointer;
+  font-weight: 800;
+  padding: 10px 14px;
+}
+
+.tab-button:hover,
+.tab-button:focus-visible,
+.period-button:hover,
+.period-button:focus-visible {
+  border-color: #2f7758;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(47, 119, 88, 0.18);
+}
+
+.tab-button[data-active="true"],
+.period-button[data-active="true"] {
+  border-color: #255f47;
+  background: #e6f3ec;
+  color: #17201b;
 }
 
 .add-exercise-panel {
@@ -274,7 +315,69 @@ select {
   color: #17201b;
 }
 
-.recent-empty {
+.history-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.history-summary article {
+  min-height: 72px;
+  padding: 12px;
+  border: 1px solid #c6d2ca;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.history-summary span,
+.history-summary strong {
+  display: block;
+}
+
+.history-summary span {
+  color: #557164;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.history-summary strong {
+  margin-top: 6px;
+  color: #17201b;
+  font-size: 22px;
+  line-height: 1.1;
+}
+
+.history-table-wrap {
+  overflow-x: auto;
+}
+
+.history-table {
+  width: 100%;
+  min-width: 480px;
+  border-collapse: collapse;
+  color: #2f4639;
+}
+
+.history-table th,
+.history-table td {
+  padding: 12px;
+  border-bottom: 1px solid #d8e2dc;
+  text-align: left;
+}
+
+.history-table th {
+  color: #17201b;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.history-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.recent-empty,
+.history-empty {
   min-height: 72px;
 }
 
@@ -388,6 +491,15 @@ select {
 
   .recent-record {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .history-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .tab-button,
+  .period-button {
+    flex: 1 1 120px;
   }
 
   .muscle-groups {

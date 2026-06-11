@@ -63,6 +63,47 @@ export function getRecentRecords(records = [], exerciseId, limit = 3) {
     .slice(0, limit);
 }
 
+export function filterRecordsByPeriod(records = [], period = "all", today = getTodayDate()) {
+  if (period === "all") {
+    return [...records];
+  }
+
+  const days = period === "7-days" ? 7 : period === "30-days" ? 30 : null;
+
+  if (!days) {
+    return [...records];
+  }
+
+  const endDate = normalizeDate(today);
+  const startDate = addDays(endDate, -(days - 1));
+
+  return records.filter(
+    (record) => record.date >= startDate && record.date <= endDate,
+  );
+}
+
+export function getHistoryRecords(records = [], exerciseId, period = "all", today = getTodayDate()) {
+  if (!exerciseId) {
+    return [];
+  }
+
+  return filterRecordsByPeriod(
+    records.filter((record) => record.exerciseId === exerciseId),
+    period,
+    today,
+  ).sort(compareNewestRecords);
+}
+
+export function getHistorySummary(records = []) {
+  return {
+    highestWeightKg:
+      records.length > 0
+        ? Math.max(...records.map((record) => Number(record.weightKg)))
+        : null,
+    totalSets: records.length,
+  };
+}
+
 function isNonNegativeInteger(value) {
   const normalizedValue = String(value ?? "").trim();
 
@@ -99,4 +140,24 @@ function compareNewestRecords(firstRecord, secondRecord) {
   }
 
   return secondRecord.createdAt.localeCompare(firstRecord.createdAt);
+}
+
+function getTodayDate() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+}
+
+function normalizeDate(date) {
+  return String(date).slice(0, 10);
+}
+
+function addDays(date, amount) {
+  const parsedDate = new Date(`${date}T00:00:00.000Z`);
+  parsedDate.setUTCDate(parsedDate.getUTCDate() + amount);
+
+  return parsedDate.toISOString().slice(0, 10);
 }
