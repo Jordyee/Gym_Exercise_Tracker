@@ -76,6 +76,8 @@ select {
 
 .selected-panel,
 .add-exercise-panel,
+.set-log-panel,
+.recent-records-panel,
 .catalog-section {
   border: 1px solid #c6d2ca;
   border-radius: 8px;
@@ -83,7 +85,9 @@ select {
   box-shadow: 0 12px 32px rgba(38, 60, 48, 0.08);
 }
 
-.selected-panel {
+.selected-panel,
+.set-log-panel,
+.recent-records-panel {
   margin-bottom: 18px;
   padding: 18px;
 }
@@ -105,6 +109,12 @@ select {
 
 .add-exercise-form {
   width: 100%;
+}
+
+.set-log-fields {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 12px;
 }
 
 .add-exercise-fields {
@@ -225,6 +235,49 @@ select {
   font-weight: 800;
 }
 
+.form-error {
+  margin: 0 0 12px;
+  color: #b42318;
+  font-weight: 800;
+}
+
+.form-status {
+  margin: 0;
+  align-self: center;
+  color: #255f47;
+  font-weight: 800;
+}
+
+.recent-records-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recent-record {
+  display: grid;
+  grid-template-columns: minmax(108px, 1fr) minmax(72px, 0.7fr) minmax(72px, 0.7fr) minmax(72px, 0.7fr);
+  gap: 8px;
+  align-items: center;
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 1px solid #c6d2ca;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #2f4639;
+  font-size: 14px;
+}
+
+.recent-record strong {
+  color: #17201b;
+}
+
+.recent-empty {
+  min-height: 72px;
+}
+
 .muscle-groups {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -328,8 +381,13 @@ select {
   }
 
   .add-exercise-fields,
+  .set-log-fields,
   .exercise-filters {
     grid-template-columns: 1fr;
+  }
+
+  .recent-record {
+    grid-template-columns: 1fr 1fr;
   }
 
   .muscle-groups {

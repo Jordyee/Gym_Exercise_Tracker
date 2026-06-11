@@ -20,7 +20,7 @@ Working branch: `feature/mvp-remaining-issues`
 | 1 | Default exercise catalog selection | None | Completed before this session |
 | 2 | Search and filter exercise | Issue 1 | Delegated after Issue 1 |
 | 3 | Add custom exercise | Issue 2 | Delegated after Issue 2 |
-| 4 | Log set and see last 3 records | Issue 1 | Pending controlled integration |
+| 4 | Log set and see last 3 records | Issue 1 | Delegated after Issue 3 |
 | 5 | View history per exercise | Issue 4 | Pending Issue 4 review |
 | 6 | Edit and delete set records | Issue 4, Issue 5 | Pending Issue 5 review |
 | 7 | Browser storage and preferences | Issue 3, Issue 4 | Pending Issue 3 and Issue 4 review |
@@ -96,3 +96,37 @@ Working branch: `feature/mvp-remaining-issues`
   - Added custom exercises become active immediately and can be selected again.
 - Remaining risk:
   - Custom exercises are not persistent yet; this is intentionally deferred to Issue 7.
+
+### Issue 4 - Log Set and See Last 3 Records
+
+- Agent: Mencius
+- Status: Completed and reviewed by main agent
+- Scope:
+  - `src/App.jsx`
+  - `src/components/SetLogForm.jsx`
+  - `src/components/RecentRecords.jsx`
+  - `src/lib/records.js`
+  - `tests/records.test.js`
+  - `src/styles/index.css`
+- Blocking status: Issue 1 satisfied.
+- Review status: Passed.
+- Files changed:
+  - `src/App.jsx`
+  - `src/components/SetLogForm.jsx`
+  - `src/components/RecentRecords.jsx`
+  - `src/lib/records.js`
+  - `tests/records.test.js`
+  - `src/styles/index.css`
+- Verification:
+  - Sub-agent reported TDD coverage for validation and recent record ordering.
+  - `npm test` passed with 15 tests.
+  - `npm run build` passed.
+- Acceptance review:
+  - Set records can be saved for the active exercise.
+  - Weight `0` is valid and stored as integer kg.
+  - Reps and set number require positive integers.
+  - Date is required.
+  - Validation errors appear near invalid fields.
+  - Last 3 records update after saving.
+- Remaining risk:
+  - Records are held in React state only until Issue 7 adds browser persistence.
