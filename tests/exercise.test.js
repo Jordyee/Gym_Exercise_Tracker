@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { DEFAULT_EXERCISES, MUSCLE_GROUPS } from "../src/data/defaultExercises.js";
-import { filterExercises } from "../src/lib/exercise.js";
+import {
+  createCustomExercise,
+  filterExercises,
+  validateCustomExerciseInput,
+} from "../src/lib/exercise.js";
 
 describe("default exercise catalog", () => {
   it("includes at least two exercises for every supported muscle group", () => {
@@ -74,5 +78,94 @@ describe("exercise filtering", () => {
     });
 
     expect(exercises).toEqual([]);
+  });
+});
+
+describe("custom exercise helpers", () => {
+  it("requires an exercise name and muscle group", () => {
+    const validation = validateCustomExerciseInput({
+      name: "   ",
+      muscleGroup: "",
+    });
+
+    expect(validation).toEqual({
+      isValid: false,
+      errors: {
+        name: "Exercise name is required.",
+        muscleGroup: "Choose a muscle group.",
+      },
+    });
+  });
+
+  it("rejects a muscle group outside the supported catalog groups", () => {
+    const validation = validateCustomExerciseInput({
+      name: "Farmer Carry",
+      muscleGroup: "Conditioning",
+    });
+
+    expect(validation).toEqual({
+      isValid: false,
+      errors: {
+        muscleGroup: "Choose a valid muscle group.",
+      },
+    });
+  });
+
+  it("creates a valid custom exercise with a stable unique id", () => {
+    const result = createCustomExercise(
+      {
+        name: "  Farmer Carry  ",
+        muscleGroup: "Upper Body",
+      },
+      DEFAULT_EXERCISES,
+    );
+
+    expect(result).toEqual({
+      exercise: {
+        id: "custom-farmer-carry",
+        name: "Farmer Carry",
+        muscleGroup: "Upper Body",
+        source: "custom",
+      },
+      errors: {},
+    });
+  });
+
+  it("keeps duplicate custom exercise ids unique", () => {
+    const result = createCustomExercise(
+      {
+        name: "Bench Press",
+        muscleGroup: "Chest",
+      },
+      [
+        ...DEFAULT_EXERCISES,
+        {
+          id: "custom-bench-press",
+          name: "Bench Press",
+          muscleGroup: "Chest",
+          source: "custom",
+        },
+      ],
+    );
+
+    expect(result.exercise.id).toBe("custom-bench-press-2");
+  });
+
+  it("keeps custom exercises searchable and filterable", () => {
+    const result = createCustomExercise(
+      {
+        name: "Farmer Carry",
+        muscleGroup: "Upper Body",
+      },
+      DEFAULT_EXERCISES,
+    );
+    const exercises = [...DEFAULT_EXERCISES, result.exercise];
+
+    const filteredExercises = filterExercises(exercises, {
+      query: "farmer",
+      muscleGroup: "Upper Body",
+    });
+
+    expect(filteredExercises).toEqual([result.exercise]);
   });
 });

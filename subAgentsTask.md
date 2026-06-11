@@ -19,7 +19,7 @@ Working branch: `feature/mvp-remaining-issues`
 | --- | --- | --- | --- |
 | 1 | Default exercise catalog selection | None | Completed before this session |
 | 2 | Search and filter exercise | Issue 1 | Delegated after Issue 1 |
-| 3 | Add custom exercise | Issue 2 | Pending Issue 2 review |
+| 3 | Add custom exercise | Issue 2 | Delegated after Issue 2 |
 | 4 | Log set and see last 3 records | Issue 1 | Pending controlled integration |
 | 5 | View history per exercise | Issue 4 | Pending Issue 4 review |
 | 6 | Edit and delete set records | Issue 4, Issue 5 | Pending Issue 5 review |
@@ -62,3 +62,37 @@ Working branch: `feature/mvp-remaining-issues`
   - Exercises selected from filtered results remain active.
 - Remaining risk:
   - Browser interaction was reported by sub-agent and build/test passed locally; final full-flow browser verification will run after all issues are integrated.
+
+### Issue 3 - Add Custom Exercise
+
+- Agent: Jason
+- Status: Completed and reviewed by main agent
+- Scope:
+  - `src/App.jsx`
+  - `src/components/AddExerciseForm.jsx`
+  - `src/components/ExercisePicker.jsx`
+  - `src/lib/exercise.js`
+  - `tests/exercise.test.js`
+  - `src/styles/index.css`
+- Blocking status: Issue 2 satisfied.
+- Review status: Passed.
+- Files changed:
+  - `src/App.jsx`
+  - `src/components/AddExerciseForm.jsx`
+  - `src/components/ExercisePicker.jsx`
+  - `src/lib/exercise.js`
+  - `tests/exercise.test.js`
+  - `src/styles/index.css`
+- Verification:
+  - Sub-agent reported TDD red for missing custom exercise helpers before implementation.
+  - `npm test` passed with 11 tests.
+  - `npm run build` passed.
+- Acceptance review:
+  - Add custom exercise form can be opened.
+  - Name and muscle group are required.
+  - Missing fields show validation errors.
+  - Added custom exercises appear in the picker.
+  - Added custom exercises are included in search/filter.
+  - Added custom exercises become active immediately and can be selected again.
+- Remaining risk:
+  - Custom exercises are not persistent yet; this is intentionally deferred to Issue 7.

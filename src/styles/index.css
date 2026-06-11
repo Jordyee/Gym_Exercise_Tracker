@@ -75,6 +75,7 @@ select {
 }
 
 .selected-panel,
+.add-exercise-panel,
 .catalog-section {
   border: 1px solid #c6d2ca;
   border-radius: 8px;
@@ -85,6 +86,72 @@ select {
 .selected-panel {
   margin-bottom: 18px;
   padding: 18px;
+}
+
+.add-exercise-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+  padding: 18px;
+}
+
+.add-exercise-panel h2 {
+  margin: 4px 0 0;
+  font-size: 22px;
+  letter-spacing: 0;
+}
+
+.add-exercise-form {
+  width: 100%;
+}
+
+.add-exercise-fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 260px);
+  gap: 12px;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.primary-action,
+.secondary-action,
+.ghost-action {
+  min-height: 44px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.primary-action,
+.secondary-action {
+  border: 1px solid #255f47;
+  background: #2f7758;
+  color: #ffffff;
+  padding: 10px 14px;
+}
+
+.ghost-action {
+  border: 1px solid #b9c9bf;
+  background: #ffffff;
+  color: #2f4639;
+  padding: 10px 14px;
+}
+
+.primary-action:hover,
+.primary-action:focus-visible,
+.secondary-action:hover,
+.secondary-action:focus-visible,
+.ghost-action:hover,
+.ghost-action:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(47, 119, 88, 0.18);
 }
 
 .selected-panel h2 {
@@ -145,6 +212,17 @@ select {
   border-color: #2f7758;
   outline: none;
   box-shadow: 0 0 0 3px rgba(47, 119, 88, 0.18);
+}
+
+.field input[aria-invalid="true"],
+.field select[aria-invalid="true"] {
+  border-color: #b42318;
+}
+
+.field-error {
+  color: #b42318;
+  font-size: 13px;
+  font-weight: 800;
 }
 
 .muscle-groups {
@@ -245,6 +323,11 @@ select {
     margin-top: 12px;
   }
 
+  .add-exercise-panel {
+    display: grid;
+  }
+
+  .add-exercise-fields,
   .exercise-filters {
     grid-template-columns: 1fr;
   }

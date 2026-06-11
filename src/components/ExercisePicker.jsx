@@ -22,7 +22,7 @@ export function ExercisePicker({
   return (
     <section className="catalog-section" aria-labelledby="catalog-title">
       <div className="section-heading">
-        <p className="section-label">Default catalog</p>
+        <p className="section-label">Exercise catalog</p>
         <h2 id="catalog-title">Choose an exercise</h2>
       </div>
 
@@ -81,7 +81,10 @@ export function ExercisePicker({
                         onClick={() => onSelectExercise(exercise.id)}
                       >
                         <span>{exercise.name}</span>
-                        <small>{exercise.muscleGroup}</small>
+                        <small>
+                          {exercise.muscleGroup}
+                          {exercise.source === "custom" ? " - Custom" : ""}
+                        </small>
                       </button>
                     );
                   })}
