@@ -1,8 +1,8 @@
 # Gym Exercise Tracker
 
-Gym Exercise Tracker adalah web app React + Vite untuk mencatat latihan gym mandiri tanpa backend. Data exercise custom, catatan set, dan preferensi pengguna disimpan di browser melalui `localStorage`.
+Gym Exercise Tracker adalah web app untuk pengguna gym pemula sampai menengah yang ingin mencatat latihan mandiri secara cepat dari browser. Aplikasi tidak memakai backend; exercise custom, catatan set, dan preferensi pengguna disimpan di browser melalui `localStorage`.
 
-## Fitur MVP
+## Fitur yang Diimplementasikan
 
 - Katalog exercise default berdasarkan muscle group.
 - Search dan filter exercise.
@@ -14,7 +14,16 @@ Gym Exercise Tracker adalah web app React + Vite untuk mencatat latihan gym mand
 - Preferensi tampilan kg/lbs dan English/Indonesia.
 - Persistensi data lokal setelah browser di-refresh.
 
-## Instalasi
+## Tech Stack
+
+- React
+- Vite
+- Vitest
+- JavaScript
+- CSS
+- Browser `localStorage`
+
+## Instruksi Instalasi
 
 ```powershell
 npm install
@@ -51,7 +60,29 @@ npm test
 npm run build
 ```
 
-## Pull Request
+## Screenshots
+
+Evidence browser dan testing tersedia di folder `assets/screenshots/`:
+
+- Aplikasi berjalan: `assets/screenshots/browser-app-running.png`
+- Mobile viewport: `assets/screenshots/mobile-viewport.png`
+- Chrome DevTools Console: `assets/screenshots/devtools-console.png`
+- Passing test: `assets/screenshots/passing-tests.png`
+- Failing test: `assets/screenshots/failing-test.png`
+
+Contoh tampilan aplikasi:
+
+![Gym Exercise Tracker running in browser](assets/screenshots/browser-app-running.png)
+
+## Known Limitations
+
+- Data hanya tersimpan di browser lokal dan dapat hilang jika pengguna menghapus data browser.
+- Tidak ada login, akun pengguna, backend, database server, atau sinkronisasi antarperangkat.
+- Aplikasi belum menyediakan export/import data untuk backup.
+- Aplikasi belum menyediakan program latihan otomatis, grafik progres, atau analitik lanjutan.
+- Pada mobile viewport, area riwayat dapat memiliki horizontal scroll lokal saat tombol Edit/Delete terlihat. Kontrol tetap dapat dijangkau dan digunakan.
+
+## Pull Request dan Delivery
 
 Branch fitur untuk penyelesaian MVP:
 
@@ -79,3 +110,5 @@ Closes #7
 ```
 
 Jika nomor GitHub Issue berbeda dari dokumen lokal, sesuaikan `Closes #...` dengan issue sebenarnya.
+
+Catatan: PR final dari `development` ke `master` perlu mencantumkan kembali `Closes #2` sampai `Closes #7` agar GitHub menutup issue otomatis, karena default branch repository adalah `master`.
