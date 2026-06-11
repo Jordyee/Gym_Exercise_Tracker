@@ -1,5 +1,9 @@
 import { useState } from "react";
 import { MUSCLE_GROUPS } from "../data/defaultExercises.js";
+import {
+  getMuscleGroupLabel,
+  translateError,
+} from "../data/translations.js";
 import { createCustomExercise } from "../lib/exercise.js";
 
 const initialFormState = {
@@ -7,7 +11,7 @@ const initialFormState = {
   muscleGroup: "",
 };
 
-export function AddExerciseForm({ exercises, onAddExercise }) {
+export function AddExerciseForm({ exercises, onAddExercise, translations }) {
   const [isOpen, setIsOpen] = useState(false);
   const [formValues, setFormValues] = useState(initialFormState);
   const [errors, setErrors] = useState({});
@@ -52,15 +56,15 @@ export function AddExerciseForm({ exercises, onAddExercise }) {
     return (
       <section className="add-exercise-panel" aria-labelledby="add-exercise-title">
         <div>
-          <p className="section-label">Custom exercise</p>
-          <h2 id="add-exercise-title">Need a different exercise?</h2>
+          <p className="section-label">{translations.addExercise.label}</p>
+          <h2 id="add-exercise-title">{translations.addExercise.closedTitle}</h2>
         </div>
         <button
           className="secondary-action"
           type="button"
           onClick={() => setIsOpen(true)}
         >
-          Add Exercise
+          {translations.addExercise.addButton}
         </button>
       </section>
     );
@@ -70,30 +74,30 @@ export function AddExerciseForm({ exercises, onAddExercise }) {
     <section className="add-exercise-panel" aria-labelledby="add-exercise-title">
       <form className="add-exercise-form" onSubmit={handleSubmit} noValidate>
         <div className="section-heading">
-          <p className="section-label">Custom exercise</p>
-          <h2 id="add-exercise-title">Add exercise</h2>
+          <p className="section-label">{translations.addExercise.label}</p>
+          <h2 id="add-exercise-title">{translations.addExercise.openTitle}</h2>
         </div>
 
         <div className="add-exercise-fields">
           <label className="field">
-            <span>Exercise name</span>
+            <span>{translations.addExercise.name}</span>
             <input
               type="text"
               value={formValues.name}
               onChange={(event) => updateField("name", event.target.value)}
-              placeholder="Farmer Carry"
+              placeholder={translations.addExercise.namePlaceholder}
               aria-invalid={errors.name ? "true" : "false"}
               aria-describedby={errors.name ? "custom-exercise-name-error" : undefined}
             />
             {errors.name ? (
               <span className="field-error" id="custom-exercise-name-error">
-                {errors.name}
+                {translateError(errors.name, translations)}
               </span>
             ) : null}
           </label>
 
           <label className="field">
-            <span>Muscle group</span>
+            <span>{translations.addExercise.muscleGroup}</span>
             <select
               value={formValues.muscleGroup}
               onChange={(event) =>
@@ -104,10 +108,10 @@ export function AddExerciseForm({ exercises, onAddExercise }) {
                 errors.muscleGroup ? "custom-exercise-muscle-group-error" : undefined
               }
             >
-              <option value="">Choose muscle group</option>
+              <option value="">{translations.addExercise.chooseMuscleGroup}</option>
               {MUSCLE_GROUPS.map((muscleGroup) => (
                 <option value={muscleGroup} key={muscleGroup}>
-                  {muscleGroup}
+                  {getMuscleGroupLabel(muscleGroup, translations)}
                 </option>
               ))}
             </select>
@@ -116,7 +120,7 @@ export function AddExerciseForm({ exercises, onAddExercise }) {
                 className="field-error"
                 id="custom-exercise-muscle-group-error"
               >
-                {errors.muscleGroup}
+                {translateError(errors.muscleGroup, translations)}
               </span>
             ) : null}
           </label>
@@ -124,10 +128,10 @@ export function AddExerciseForm({ exercises, onAddExercise }) {
 
         <div className="form-actions">
           <button className="primary-action" type="submit">
-            Save Exercise
+            {translations.addExercise.save}
           </button>
           <button className="ghost-action" type="button" onClick={handleCancel}>
-            Cancel
+            {translations.addExercise.cancel}
           </button>
         </div>
       </form>

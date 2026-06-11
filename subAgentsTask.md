@@ -23,7 +23,7 @@ Working branch: `feature/mvp-remaining-issues`
 | 4 | Log set and see last 3 records | Issue 1 | Delegated after Issue 3 |
 | 5 | View history per exercise | Issue 4 | Delegated after Issue 4 |
 | 6 | Edit and delete set records | Issue 4, Issue 5 | Delegated after Issue 5 |
-| 7 | Browser storage and preferences | Issue 3, Issue 4 | Pending Issue 3 and Issue 4 review |
+| 7 | Browser storage and preferences | Issue 3, Issue 4 | Delegated after Issue 6 |
 
 ## Agent Assignments
 
@@ -199,3 +199,54 @@ Working branch: `feature/mvp-remaining-issues`
   - Cancelled delete leaves the record unchanged.
 - Remaining risk:
   - Modal/dialog flows are manually verified by sub-agent and helper-tested; final integrated browser verification will cover a representative edit/delete flow.
+
+### Issue 7 - Browser Storage and Preferences
+
+- Agent: Anscombe
+- Status: Completed and reviewed by main agent
+- Scope:
+  - `src/App.jsx`
+  - `src/components/AppHeader.jsx`
+  - `src/components/SetLogForm.jsx`
+  - `src/components/RecentRecords.jsx`
+  - `src/components/HistoryView.jsx`
+  - `src/components/EditSetModal.jsx`
+  - `src/components/ExercisePicker.jsx`
+  - `src/components/AddExerciseForm.jsx`
+  - `src/data/translations.js`
+  - `src/lib/storage.js`
+  - `src/lib/units.js`
+  - `tests/storage.test.js`
+  - `tests/units.test.js`
+  - `src/styles/index.css`
+- Blocking status: Issue 3 and Issue 4 satisfied.
+- Review status: Passed.
+- Files changed:
+  - `src/App.jsx`
+  - `src/components/AppHeader.jsx`
+  - `src/components/SetLogForm.jsx`
+  - `src/components/RecentRecords.jsx`
+  - `src/components/HistoryView.jsx`
+  - `src/components/EditSetModal.jsx`
+  - `src/components/ExercisePicker.jsx`
+  - `src/components/AddExerciseForm.jsx`
+  - `src/data/translations.js`
+  - `src/lib/storage.js`
+  - `src/lib/units.js`
+  - `tests/storage.test.js`
+  - `tests/units.test.js`
+  - `src/styles/index.css`
+- Verification:
+  - Sub-agent reported browser refresh verification for custom exercise, set record, lbs display, and Indonesian language.
+  - `npm test` passed with 29 tests.
+  - `npm run build` passed.
+- Acceptance review:
+  - Set records persist after browser refresh.
+  - Custom exercises persist after browser refresh.
+  - Users can switch display unit between kg and lbs.
+  - Internal record data remains integer `weightKg`.
+  - Lbs display uses rounded kg-to-lbs conversion.
+  - Users can switch between English and Indonesia.
+  - Language and unit preferences persist after refresh.
+- Remaining risk:
+  - localStorage unavailable/full is handled by falling back to in-memory app state, which is acceptable for MVP constraints.

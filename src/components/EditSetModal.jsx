@@ -1,6 +1,16 @@
 import { useState } from "react";
+import {
+  getMuscleGroupLabel,
+  translateError,
+} from "../data/translations.js";
 
-export function EditSetModal({ record, exercises, onSave, onCancel }) {
+export function EditSetModal({
+  record,
+  exercises,
+  translations,
+  onSave,
+  onCancel,
+}) {
   const [formValues, setFormValues] = useState({
     exerciseId: record.exerciseId,
     weightKg: String(record.weightKg),
@@ -42,19 +52,19 @@ export function EditSetModal({ record, exercises, onSave, onCancel }) {
       >
         <form className="edit-set-form" onSubmit={handleSubmit} noValidate>
           <div className="section-heading">
-            <p className="section-label">Edit record</p>
-            <h2 id="edit-set-title">Update set details</h2>
+            <p className="section-label">{translations.editSet.label}</p>
+            <h2 id="edit-set-title">{translations.editSet.title}</h2>
           </div>
 
           {errors.record ? (
             <p className="form-error" role="alert">
-              {errors.record}
+              {translateError(errors.record, translations)}
             </p>
           ) : null}
 
           <div className="edit-set-fields">
             <label className="field">
-              <span>Exercise</span>
+              <span>{translations.editSet.exercise}</span>
               <select
                 value={formValues.exerciseId}
                 onChange={(event) => updateField("exerciseId", event.target.value)}
@@ -63,22 +73,25 @@ export function EditSetModal({ record, exercises, onSave, onCancel }) {
                   errors.exerciseId ? "edit-exercise-error" : undefined
                 }
               >
-                <option value="">Choose exercise</option>
+                <option value="">{translations.editSet.chooseExercise}</option>
                 {exercises.map((exercise) => (
                   <option value={exercise.id} key={exercise.id}>
-                    {exercise.name}
+                    {`${exercise.name} - ${getMuscleGroupLabel(
+                      exercise.muscleGroup,
+                      translations,
+                    )}`}
                   </option>
                 ))}
               </select>
               {errors.exerciseId ? (
                 <span className="field-error" id="edit-exercise-error">
-                  {errors.exerciseId}
+                  {translateError(errors.exerciseId, translations)}
                 </span>
               ) : null}
             </label>
 
             <label className="field">
-              <span>Weight (kg)</span>
+              <span>{translations.editSet.weight}</span>
               <input
                 type="number"
                 min="0"
@@ -93,13 +106,13 @@ export function EditSetModal({ record, exercises, onSave, onCancel }) {
               />
               {errors.weightKg ? (
                 <span className="field-error" id="edit-weight-error">
-                  {errors.weightKg}
+                  {translateError(errors.weightKg, translations)}
                 </span>
               ) : null}
             </label>
 
             <label className="field">
-              <span>Reps</span>
+              <span>{translations.editSet.reps}</span>
               <input
                 type="number"
                 min="1"
@@ -112,13 +125,13 @@ export function EditSetModal({ record, exercises, onSave, onCancel }) {
               />
               {errors.reps ? (
                 <span className="field-error" id="edit-reps-error">
-                  {errors.reps}
+                  {translateError(errors.reps, translations)}
                 </span>
               ) : null}
             </label>
 
             <label className="field">
-              <span>Set number</span>
+              <span>{translations.editSet.setNumber}</span>
               <input
                 type="number"
                 min="1"
@@ -133,13 +146,13 @@ export function EditSetModal({ record, exercises, onSave, onCancel }) {
               />
               {errors.setNumber ? (
                 <span className="field-error" id="edit-set-number-error">
-                  {errors.setNumber}
+                  {translateError(errors.setNumber, translations)}
                 </span>
               ) : null}
             </label>
 
             <label className="field">
-              <span>Date</span>
+              <span>{translations.editSet.date}</span>
               <input
                 type="date"
                 value={formValues.date}
@@ -149,7 +162,7 @@ export function EditSetModal({ record, exercises, onSave, onCancel }) {
               />
               {errors.date ? (
                 <span className="field-error" id="edit-date-error">
-                  {errors.date}
+                  {translateError(errors.date, translations)}
                 </span>
               ) : null}
             </label>
@@ -157,10 +170,10 @@ export function EditSetModal({ record, exercises, onSave, onCancel }) {
 
           <div className="modal-actions">
             <button className="primary-action" type="submit">
-              Save Changes
+              {translations.editSet.save}
             </button>
             <button className="ghost-action" type="button" onClick={onCancel}>
-              Cancel
+              {translations.editSet.cancel}
             </button>
           </div>
         </form>

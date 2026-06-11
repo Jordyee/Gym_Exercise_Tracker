@@ -1,0 +1,265 @@
+const VALIDATION_MESSAGES = {
+  exerciseNameRequired: "Exercise name is required.",
+  chooseMuscleGroup: "Choose a muscle group.",
+  chooseValidMuscleGroup: "Choose a valid muscle group.",
+  chooseExerciseBeforeSaving: "Choose an exercise before saving a set.",
+  weightWholeKg: "Weight must be a whole number in kg.",
+  repsPositive: "Reps must be a positive whole number.",
+  setNumberPositive: "Set number must be a positive whole number.",
+  dateRequired: "Date is required.",
+  recordNotFound: "Set record was not found.",
+};
+
+export const TRANSLATIONS = {
+  en: {
+    header: {
+      eyebrow: "MVP tracker",
+      title: "Gym Exercise Tracker",
+      language: "Language",
+      weightUnit: "Display unit",
+      english: "English",
+      indonesia: "Indonesia",
+    },
+    tabs: {
+      label: "Main views",
+      log: "Log Set",
+      history: "History",
+    },
+    selected: {
+      label: "Selected exercise",
+      empty: "No exercise selected.",
+    },
+    setLog: {
+      label: "Log set",
+      recordTitle: (exerciseName) => `Record ${exerciseName}`,
+      chooseFirst: "Choose an exercise first",
+      weight: "Weight (kg)",
+      reps: "Reps",
+      setNumber: "Set number",
+      date: "Date",
+      save: "Save Set",
+      saved: "Set saved.",
+    },
+    recent: {
+      label: "Last 3 records",
+      emptyTitle: "No exercise selected",
+      empty: "No set records for this exercise yet.",
+      reps: (value) => `${value} reps`,
+      set: (value) => `Set ${value}`,
+    },
+    addExercise: {
+      label: "Custom exercise",
+      closedTitle: "Need a different exercise?",
+      openTitle: "Add exercise",
+      addButton: "Add Exercise",
+      name: "Exercise name",
+      namePlaceholder: "Farmer Carry",
+      muscleGroup: "Muscle group",
+      chooseMuscleGroup: "Choose muscle group",
+      save: "Save Exercise",
+      cancel: "Cancel",
+    },
+    catalog: {
+      label: "Exercise catalog",
+      title: "Choose an exercise",
+      search: "Search exercise",
+      searchPlaceholder: "Bench press",
+      muscleGroupFilter: "Muscle group filter",
+      allMuscleGroups: "All muscle groups",
+      custom: "Custom",
+      empty: "No exercises match your search and muscle group filter.",
+    },
+    history: {
+      label: "Exercise history",
+      emptyTitle: "No exercise selected",
+      periodLabel: "History period",
+      periods: {
+        "7-days": "7 days",
+        "30-days": "30 days",
+        all: "All",
+      },
+      highestWeight: "Highest weight",
+      noData: "No data",
+      totalSets: "Total sets",
+      chooseExercise: "Choose an exercise on Log Set to view history.",
+      noRecords: "No history records match this filter.",
+      date: "Date",
+      weight: "Weight",
+      reps: "Reps",
+      set: "Set",
+      actions: "Actions",
+      edit: "Edit",
+      delete: "Delete",
+    },
+    editSet: {
+      label: "Edit record",
+      title: "Update set details",
+      exercise: "Exercise",
+      chooseExercise: "Choose exercise",
+      weight: "Weight (kg)",
+      reps: "Reps",
+      setNumber: "Set number",
+      date: "Date",
+      save: "Save Changes",
+      cancel: "Cancel",
+    },
+    confirmDelete: {
+      title: "Delete set record?",
+      confirm: "Delete Record",
+      cancel: "Keep Record",
+      message: (record, weightLabel) =>
+        `${record.date} | ${weightLabel} | ${record.reps} reps | Set ${record.setNumber}`,
+    },
+    muscleGroups: {
+      Chest: "Chest",
+      Back: "Back",
+      Shoulders: "Shoulders",
+      Arms: "Arms",
+      Core: "Core",
+      Legs: "Legs",
+      "Upper Body": "Upper Body",
+      "Lower Body": "Lower Body",
+    },
+    validationErrors: Object.fromEntries(
+      Object.values(VALIDATION_MESSAGES).map((message) => [message, message]),
+    ),
+  },
+  id: {
+    header: {
+      eyebrow: "Pelacak MVP",
+      title: "Gym Exercise Tracker",
+      language: "Bahasa",
+      weightUnit: "Satuan tampil",
+      english: "English",
+      indonesia: "Indonesia",
+    },
+    tabs: {
+      label: "Tampilan utama",
+      log: "Catat Set",
+      history: "Riwayat",
+    },
+    selected: {
+      label: "Exercise terpilih",
+      empty: "Belum ada exercise terpilih.",
+    },
+    setLog: {
+      label: "Catat set",
+      recordTitle: (exerciseName) => `Catat ${exerciseName}`,
+      chooseFirst: "Pilih exercise dulu",
+      weight: "Beban (kg)",
+      reps: "Repetisi",
+      setNumber: "Nomor set",
+      date: "Tanggal",
+      save: "Simpan Set",
+      saved: "Set tersimpan.",
+    },
+    recent: {
+      label: "3 catatan terakhir",
+      emptyTitle: "Belum ada exercise terpilih",
+      empty: "Belum ada catatan set untuk exercise ini.",
+      reps: (value) => `${value} repetisi`,
+      set: (value) => `Set ${value}`,
+    },
+    addExercise: {
+      label: "Exercise custom",
+      closedTitle: "Butuh exercise lain?",
+      openTitle: "Tambah exercise",
+      addButton: "Tambah Exercise",
+      name: "Nama exercise",
+      namePlaceholder: "Farmer Carry",
+      muscleGroup: "Kelompok otot",
+      chooseMuscleGroup: "Pilih kelompok otot",
+      save: "Simpan Exercise",
+      cancel: "Batal",
+    },
+    catalog: {
+      label: "Katalog exercise",
+      title: "Pilih exercise",
+      search: "Cari exercise",
+      searchPlaceholder: "Bench press",
+      muscleGroupFilter: "Filter kelompok otot",
+      allMuscleGroups: "Semua kelompok otot",
+      custom: "Custom",
+      empty: "Tidak ada exercise yang cocok dengan pencarian dan filter.",
+    },
+    history: {
+      label: "Riwayat exercise",
+      emptyTitle: "Belum ada exercise terpilih",
+      periodLabel: "Periode riwayat",
+      periods: {
+        "7-days": "7 hari",
+        "30-days": "30 hari",
+        all: "Semua",
+      },
+      highestWeight: "Beban tertinggi",
+      noData: "Belum ada data",
+      totalSets: "Total set",
+      chooseExercise: "Pilih exercise di Catat Set untuk melihat riwayat.",
+      noRecords: "Tidak ada catatan riwayat untuk filter ini.",
+      date: "Tanggal",
+      weight: "Beban",
+      reps: "Repetisi",
+      set: "Set",
+      actions: "Aksi",
+      edit: "Edit",
+      delete: "Hapus",
+    },
+    editSet: {
+      label: "Edit catatan",
+      title: "Ubah detail set",
+      exercise: "Exercise",
+      chooseExercise: "Pilih exercise",
+      weight: "Beban (kg)",
+      reps: "Repetisi",
+      setNumber: "Nomor set",
+      date: "Tanggal",
+      save: "Simpan Perubahan",
+      cancel: "Batal",
+    },
+    confirmDelete: {
+      title: "Hapus catatan set?",
+      confirm: "Hapus Catatan",
+      cancel: "Simpan Catatan",
+      message: (record, weightLabel) =>
+        `${record.date} | ${weightLabel} | ${record.reps} repetisi | Set ${record.setNumber}`,
+    },
+    muscleGroups: {
+      Chest: "Dada",
+      Back: "Punggung",
+      Shoulders: "Bahu",
+      Arms: "Lengan",
+      Core: "Core",
+      Legs: "Kaki",
+      "Upper Body": "Tubuh atas",
+      "Lower Body": "Tubuh bawah",
+    },
+    validationErrors: {
+      [VALIDATION_MESSAGES.exerciseNameRequired]: "Nama exercise wajib diisi.",
+      [VALIDATION_MESSAGES.chooseMuscleGroup]: "Pilih kelompok otot.",
+      [VALIDATION_MESSAGES.chooseValidMuscleGroup]:
+        "Pilih kelompok otot yang valid.",
+      [VALIDATION_MESSAGES.chooseExerciseBeforeSaving]:
+        "Pilih exercise sebelum menyimpan set.",
+      [VALIDATION_MESSAGES.weightWholeKg]:
+        "Beban harus berupa bilangan bulat dalam kg.",
+      [VALIDATION_MESSAGES.repsPositive]:
+        "Repetisi harus berupa bilangan bulat positif.",
+      [VALIDATION_MESSAGES.setNumberPositive]:
+        "Nomor set harus berupa bilangan bulat positif.",
+      [VALIDATION_MESSAGES.dateRequired]: "Tanggal wajib diisi.",
+      [VALIDATION_MESSAGES.recordNotFound]: "Catatan set tidak ditemukan.",
+    },
+  },
+};
+
+export function getTranslations(language = "en") {
+  return TRANSLATIONS[language] ?? TRANSLATIONS.en;
+}
+
+export function getMuscleGroupLabel(muscleGroup, translations) {
+  return translations.muscleGroups[muscleGroup] ?? muscleGroup;
+}
+
+export function translateError(message, translations) {
+  return translations.validationErrors[message] ?? message;
+}

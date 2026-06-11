@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { translateError } from "../data/translations.js";
 
 const initialFormValues = {
   weightKg: "",
@@ -7,10 +8,10 @@ const initialFormValues = {
   date: getTodayDate(),
 };
 
-export function SetLogForm({ selectedExercise, onSaveSet }) {
+export function SetLogForm({ selectedExercise, onSaveSet, translations }) {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [errors, setErrors] = useState({});
-  const [statusMessage, setStatusMessage] = useState("");
+  const [isSaved, setIsSaved] = useState(false);
 
   function updateField(field, value) {
     setFormValues((currentValues) => ({
@@ -21,7 +22,7 @@ export function SetLogForm({ selectedExercise, onSaveSet }) {
       ...currentErrors,
       [field]: undefined,
     }));
-    setStatusMessage("");
+    setIsSaved(false);
   }
 
   function handleSubmit(event) {
@@ -34,12 +35,12 @@ export function SetLogForm({ selectedExercise, onSaveSet }) {
 
     if (!result.record) {
       setErrors(result.errors);
-      setStatusMessage("");
+      setIsSaved(false);
       return;
     }
 
     setErrors({});
-    setStatusMessage("Set saved.");
+    setIsSaved(true);
     setFormValues({
       weightKg: "",
       reps: "",
@@ -52,23 +53,23 @@ export function SetLogForm({ selectedExercise, onSaveSet }) {
     <section className="set-log-panel" aria-labelledby="set-log-title">
       <form className="set-log-form" onSubmit={handleSubmit} noValidate>
         <div className="section-heading">
-          <p className="section-label">Log set</p>
+          <p className="section-label">{translations.setLog.label}</p>
           <h2 id="set-log-title">
             {selectedExercise
-              ? `Record ${selectedExercise.name}`
-              : "Choose an exercise first"}
+              ? translations.setLog.recordTitle(selectedExercise.name)
+              : translations.setLog.chooseFirst}
           </h2>
         </div>
 
         {errors.exerciseId ? (
           <p className="form-error" role="alert">
-            {errors.exerciseId}
+            {translateError(errors.exerciseId, translations)}
           </p>
         ) : null}
 
         <div className="set-log-fields">
           <label className="field">
-            <span>Weight (kg)</span>
+            <span>{translations.setLog.weight}</span>
             <input
               type="number"
               min="0"
@@ -82,13 +83,13 @@ export function SetLogForm({ selectedExercise, onSaveSet }) {
             />
             {errors.weightKg ? (
               <span className="field-error" id="set-weight-error">
-                {errors.weightKg}
+                {translateError(errors.weightKg, translations)}
               </span>
             ) : null}
           </label>
 
           <label className="field">
-            <span>Reps</span>
+            <span>{translations.setLog.reps}</span>
             <input
               type="number"
               min="1"
@@ -102,13 +103,13 @@ export function SetLogForm({ selectedExercise, onSaveSet }) {
             />
             {errors.reps ? (
               <span className="field-error" id="set-reps-error">
-                {errors.reps}
+                {translateError(errors.reps, translations)}
               </span>
             ) : null}
           </label>
 
           <label className="field">
-            <span>Set number</span>
+            <span>{translations.setLog.setNumber}</span>
             <input
               type="number"
               min="1"
@@ -124,13 +125,13 @@ export function SetLogForm({ selectedExercise, onSaveSet }) {
             />
             {errors.setNumber ? (
               <span className="field-error" id="set-number-error">
-                {errors.setNumber}
+                {translateError(errors.setNumber, translations)}
               </span>
             ) : null}
           </label>
 
           <label className="field">
-            <span>Date</span>
+            <span>{translations.setLog.date}</span>
             <input
               type="date"
               value={formValues.date}
@@ -140,7 +141,7 @@ export function SetLogForm({ selectedExercise, onSaveSet }) {
             />
             {errors.date ? (
               <span className="field-error" id="set-date-error">
-                {errors.date}
+                {translateError(errors.date, translations)}
               </span>
             ) : null}
           </label>
@@ -148,11 +149,11 @@ export function SetLogForm({ selectedExercise, onSaveSet }) {
 
         <div className="form-actions">
           <button className="primary-action" type="submit">
-            Save Set
+            {translations.setLog.save}
           </button>
-          {statusMessage ? (
+          {isSaved ? (
             <p className="form-status" role="status">
-              {statusMessage}
+              {translations.setLog.saved}
             </p>
           ) : null}
         </div>

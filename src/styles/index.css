@@ -55,6 +55,40 @@ select {
   line-height: 1.05;
 }
 
+.preference-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  width: min(100%, 340px);
+}
+
+.preference-control {
+  display: grid;
+  gap: 6px;
+}
+
+.preference-control span {
+  color: #557164;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.preference-control select {
+  min-height: 44px;
+  width: 100%;
+  border: 1px solid #b9c9bf;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #17201b;
+  padding: 9px 10px;
+}
+
+.preference-control select:focus {
+  border-color: #2f7758;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(47, 119, 88, 0.18);
+}
+
 .eyebrow,
 .section-label,
 .scope-label {
@@ -568,6 +602,11 @@ select {
   .app-header h1 {
     max-width: none;
     font-size: 28px;
+  }
+
+  .preference-controls {
+    margin-top: 14px;
+    width: 100%;
   }
 
   .scope-label {
