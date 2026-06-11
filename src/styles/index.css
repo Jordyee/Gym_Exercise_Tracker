@@ -111,6 +111,42 @@ select {
   font-size: 22px;
 }
 
+.exercise-filters {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 260px);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field span {
+  color: #2f4639;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.field input,
+.field select {
+  min-height: 48px;
+  width: 100%;
+  border: 1px solid #b9c9bf;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #17201b;
+  padding: 10px 12px;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: #2f7758;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(47, 119, 88, 0.18);
+}
+
 .muscle-groups {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -173,6 +209,23 @@ select {
   color: #557164;
 }
 
+.empty-state {
+  min-height: 96px;
+  display: grid;
+  place-items: center;
+  border: 1px dashed #a9bbb0;
+  border-radius: 8px;
+  background: #f8faf8;
+  color: #557164;
+  text-align: center;
+}
+
+.empty-state p {
+  margin: 0;
+  max-width: 34ch;
+  font-weight: 700;
+}
+
 @media (max-width: 560px) {
   .app-shell {
     padding: 16px;
@@ -190,6 +243,10 @@ select {
   .scope-label {
     display: inline-block;
     margin-top: 12px;
+  }
+
+  .exercise-filters {
+    grid-template-columns: 1fr;
   }
 
   .muscle-groups {

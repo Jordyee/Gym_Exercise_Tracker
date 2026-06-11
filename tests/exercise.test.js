@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { DEFAULT_EXERCISES, MUSCLE_GROUPS } from "../src/data/defaultExercises.js";
+import { filterExercises } from "../src/lib/exercise.js";
 
 describe("default exercise catalog", () => {
   it("includes at least two exercises for every supported muscle group", () => {
@@ -24,5 +25,54 @@ describe("default exercise catalog", () => {
       expect(MUSCLE_GROUPS).toContain(exercise.muscleGroup);
       expect(exercise.source).toBe("default");
     }
+  });
+});
+
+describe("exercise filtering", () => {
+  it("filters exercises by name query", () => {
+    const exercises = filterExercises(DEFAULT_EXERCISES, {
+      query: "press",
+      muscleGroup: "All",
+    });
+
+    expect(exercises.map((exercise) => exercise.id)).toEqual([
+      "bench-press",
+      "chest-press-machine",
+      "shoulder-press",
+      "leg-press",
+    ]);
+  });
+
+  it("filters exercises by muscle group", () => {
+    const exercises = filterExercises(DEFAULT_EXERCISES, {
+      query: "",
+      muscleGroup: "Back",
+    });
+
+    expect(exercises.map((exercise) => exercise.id)).toEqual([
+      "lat-pulldown",
+      "seated-cable-row",
+    ]);
+  });
+
+  it("combines name query and muscle group filters", () => {
+    const exercises = filterExercises(DEFAULT_EXERCISES, {
+      query: "press",
+      muscleGroup: "Chest",
+    });
+
+    expect(exercises.map((exercise) => exercise.id)).toEqual([
+      "bench-press",
+      "chest-press-machine",
+    ]);
+  });
+
+  it("returns an empty list when no exercises match", () => {
+    const exercises = filterExercises(DEFAULT_EXERCISES, {
+      query: "deadlift",
+      muscleGroup: "Chest",
+    });
+
+    expect(exercises).toEqual([]);
   });
 });
