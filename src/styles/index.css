@@ -1,0 +1,198 @@
+:root {
+  color: #17201b;
+  background: #eef2ed;
+  font-family:
+    "Aptos",
+    "Segoe UI",
+    sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100dvh;
+  background:
+    linear-gradient(135deg, rgba(40, 92, 69, 0.12), transparent 42%),
+    #eef2ed;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.app-shell {
+  width: min(100%, 980px);
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.app-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.app-header h1,
+.selected-panel h2,
+.section-heading h2 {
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.app-header h1 {
+  max-width: 14ch;
+  font-size: 32px;
+  line-height: 1.05;
+}
+
+.eyebrow,
+.section-label,
+.scope-label {
+  margin: 0;
+  color: #557164;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.scope-label {
+  min-width: max-content;
+  padding: 8px 10px;
+  border: 1px solid #b9c9bf;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.62);
+  text-transform: none;
+}
+
+.selected-panel,
+.catalog-section {
+  border: 1px solid #c6d2ca;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 12px 32px rgba(38, 60, 48, 0.08);
+}
+
+.selected-panel {
+  margin-bottom: 18px;
+  padding: 18px;
+}
+
+.selected-panel h2 {
+  margin-top: 6px;
+  font-size: 24px;
+}
+
+.selected-panel p:last-child {
+  margin: 6px 0 0;
+  color: #557164;
+  font-weight: 700;
+}
+
+.catalog-section {
+  padding: 18px;
+}
+
+.section-heading {
+  margin-bottom: 16px;
+}
+
+.section-heading h2 {
+  margin-top: 4px;
+  font-size: 22px;
+}
+
+.muscle-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.muscle-group {
+  min-width: 0;
+}
+
+.muscle-group h3 {
+  margin: 0 0 8px;
+  color: #2f4639;
+  font-size: 15px;
+}
+
+.exercise-list {
+  display: grid;
+  gap: 8px;
+}
+
+.exercise-button {
+  min-height: 52px;
+  padding: 10px 12px;
+  border: 1px solid #c6d2ca;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #17201b;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.exercise-button:hover,
+.exercise-button:focus-visible {
+  border-color: #2f7758;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(47, 119, 88, 0.18);
+}
+
+.exercise-button[data-selected="true"] {
+  border-color: #255f47;
+  background: #e6f3ec;
+}
+
+.exercise-button span,
+.exercise-button small {
+  display: block;
+}
+
+.exercise-button span {
+  font-weight: 800;
+}
+
+.exercise-button small {
+  margin-top: 2px;
+  color: #557164;
+}
+
+@media (max-width: 560px) {
+  .app-shell {
+    padding: 16px;
+  }
+
+  .app-header {
+    display: block;
+  }
+
+  .app-header h1 {
+    max-width: none;
+    font-size: 28px;
+  }
+
+  .scope-label {
+    display: inline-block;
+    margin-top: 12px;
+  }
+
+  .muscle-groups {
+    grid-template-columns: 1fr;
+  }
+}
