@@ -232,3 +232,71 @@ Hasil:
 - `npm test`: Passed, 4 test files, 29 tests.
 - `npm run build`: Passed.
 - Browser verification: Passed untuk tambah exercise custom, simpan set, ubah unit ke lbs, ubah bahasa ke Indonesia, refresh browser, data/preferensi tetap ada, tampilan mobile tanpa horizontal overflow, dan tanpa console error.
+
+---
+
+## Browser and Chrome DevTools Verification
+
+Tanggal verifikasi: 2026-06-12
+
+Branch verifikasi:
+
+```text
+feature/browser-devtools-verification
+```
+
+URL lokal:
+
+```text
+http://127.0.0.1:5173
+```
+
+Browser:
+
+```text
+Google Chrome dengan Chrome DevTools
+```
+
+## Evidence
+
+Screenshot dan bukti pengujian disimpan di folder `assets/screenshots/`:
+
+- Failing test evidence: `assets/screenshots/failing-test.png`
+- Passing test evidence: `assets/screenshots/passing-tests.png`
+- Aplikasi berjalan di browser: `assets/screenshots/browser-app-running.png`
+- Pemeriksaan mobile viewport: `assets/screenshots/mobile-viewport.png`
+- Pemeriksaan Chrome DevTools Console: `assets/screenshots/devtools-console.png`
+
+## Checklist Verifikasi Browser
+
+- Main user flow: Passed. Pengguna dapat membuka aplikasi, memilih exercise, mencatat set, melihat catatan terakhir, membuka riwayat, mengedit catatan, dan menghapus catatan dengan konfirmasi.
+- Acceptance criteria Issues #1 sampai #7: Passed. Fitur katalog exercise, search/filter, custom exercise, pencatatan set, riwayat per exercise, edit/delete, localStorage, unit kg/lbs, dan bahasa English/Indonesia sudah diverifikasi dari browser.
+- Invalid input handling: Passed. Form custom exercise menolak nama atau muscle group kosong. Form catat set menolak reps dan set number yang bukan integer positif, menolak tanggal kosong, dan tetap menerima berat `0` sebagai input valid.
+- Recent records: Passed. Setelah beberapa set disimpan, aplikasi hanya menampilkan maksimal 3 catatan terakhir untuk exercise aktif.
+- History filter: Passed. Filter riwayat 7 hari, 30 hari, dan all mengubah daftar riwayat serta ringkasan sesuai periode aktif.
+- Edit record: Passed. Catatan dapat diedit, validasi tetap diterapkan, dan hasil edit tercermin pada recent records serta history.
+- Delete record: Passed. Dialog konfirmasi tampil sebelum hapus. Jika dibatalkan, catatan tetap ada. Jika dikonfirmasi, catatan hilang dari tampilan dan data lokal.
+- Unit preference: Passed. Tampilan dapat diubah dari kg ke lbs. Nilai lbs ditampilkan sebagai hasil konversi kg yang dibulatkan.
+- Language preference: Passed. Tampilan dapat diubah antara English dan Indonesia, dan pilihan bahasa tetap aktif setelah refresh.
+
+## Chrome DevTools Verification
+
+- Console: Passed. Tidak ditemukan error browser yang tidak terduga selama alur utama dijalankan.
+- Network: Passed. MVP tidak memakai backend API. Request yang terlihat hanya request asset aplikasi dari Vite/dev server, dan tidak ada request API relevan yang gagal.
+- Application Storage: Passed. Data aplikasi tersimpan di Local Storage. Custom exercise, set records, unit preference, dan language preference tetap tersedia setelah browser di-refresh.
+- Data storage constraint: Passed. Data berat internal tetap disimpan sebagai `weightKg` dalam kg integer, sedangkan lbs hanya digunakan untuk tampilan.
+
+## Responsive Layout Verification
+
+Mobile viewport diverifikasi menggunakan Chrome DevTools device toolbar.
+
+Hasil:
+
+- Mobile layout: Passed with minor note.
+- Halaman tidak menunjukkan page-level horizontal overflow.
+- Catatan minor: horizontal scroll lokal muncul pada area riwayat ketika kontrol Edit/Delete terlihat. Kontrol tetap dapat dijangkau dan digunakan, sehingga tidak memblokir alur user.
+- Input, tombol, daftar exercise, form catat set, history, dan dialog edit/delete tetap dapat digunakan pada mobile viewport.
+
+## Kesimpulan Verifikasi Browser
+
+Browser and Chrome DevTools verification dinyatakan passed untuk scope MVP. Tidak ada blocker untuk final delivery. Catatan minor yang tersisa adalah horizontal scroll lokal pada area action riwayat di mobile ketika tombol Edit/Delete tampil.
